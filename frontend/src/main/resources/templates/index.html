@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Hi</title>
+  </head>
+  <body>
+    <p>Students:</p>
+    <form action="/create" method="post">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name"><br>
+      <label for="surname">Surname:</label><br>
+      <input type="text" id="surname" name="surname"><br>
+      <label for="email">Email:</label><br>
+      <input type="text" id="email" name="email"><br>
+      <label for="age">Age:</label><br>
+      <input type="number" id="age" name="age"><br>
+      <input type="submit" value="Create">
+    </form>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Age</th>
+      </tr>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.id}">Id</td>
+        <td th:text="${student.name}">Name</td>
+        <td th:text="${student.surname}">Surname</td>
+        <td th:text="${student.email}">Email</td>
+        <td th:text="${student.age}">Age</td>
+        <td>
+          <button type="button">
+            <a th:href="@{/edit-student(id=${student.id})}">Edit</a>
+          </button>
+          <form id="update-form-${student.id}" style="display:none" action="/update" method="post">
+            <input type="hidden" name="id" th:value="${student.id}">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" th:value="${student.name}"><br>
+            <label for="surname">Surname:</label><br>
+            <input type="text" id="surname" name="surname" th:value="${student.surname}"><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email" th:value="${student.email}"><br>
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="age" th:value="${student.age}"><br>
+            <input type="submit" value="Update">
+          </form>
+        </td>
+        <td>
+          <form action="/delete" method="post">
+            <input type="hidden" name="id" th:value="${student.id}">
+            <input type="submit" value="Delete">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
