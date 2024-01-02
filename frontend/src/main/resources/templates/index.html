@@ -24,11 +24,11 @@
         <td th:text="${student.email}">Email</td>
         <td th:text="${student.age}">Age</td>
         <td>
-          <button type="button">
+          <button type="button" class="editButton">
             <a th:href="@{/edit-student(id=${student.id})}">Edit</a>
           </button>
         <td>
-          <form action="/delete" method="post">
+          <form action="/delete" method="post" id="deleteForm">
             <input type="hidden" name="id" th:value="${student.id}">
             <input type="submit" value="Delete">
           </form>

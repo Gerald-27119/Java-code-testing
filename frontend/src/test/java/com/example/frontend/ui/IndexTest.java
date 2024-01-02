@@ -1,18 +1,16 @@
 package com.example.frontend.ui;
 
 import com.example.frontend.ui.pages.IndexTestPage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class IndexTest {
     private WebDriver driver;
     private IndexTestPage indexTestPage;
@@ -20,36 +18,36 @@ public class IndexTest {
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("http://localhost:8081/welcome"); // replace with your application's URL
+        driver.get("http://localhost:8081/welcome");
         indexTestPage = new IndexTestPage(driver);
 
     }
 
     @Test
+    @Order(1)
     public void testCreateStudentLink() {
         WebElement createStudentLink = indexTestPage.getCreateStudentLink();
         assertTrue(createStudentLink.isDisplayed());
     }
 
     @Test
+    @Order(2)
     public void testStudentsTable() {
         List<WebElement> students = indexTestPage.getStudents();
-        assertTrue(students.size() > 0);
+        assertFalse(students.isEmpty());
     }
 
     @Test
+    @Order(3)
     public void testEditButton() {
-        List<WebElement> students = indexTestPage.getStudents();
-        WebElement firstStudent = students.get(0);
-        WebElement editButton = indexTestPage.getEditButton(firstStudent);
+        WebElement editButton = indexTestPage.getEditButton(0);
         assertTrue(editButton.isDisplayed());
     }
 
     @Test
+    @Order(4)
     public void testDeleteButton() {
-        List<WebElement> students = indexTestPage.getStudents();
-        WebElement firstStudent = students.get(0);
-        WebElement deleteButton = indexTestPage.getDeleteButton(firstStudent);
+        WebElement deleteButton = indexTestPage.getDeleteButton();
         assertTrue(deleteButton.isDisplayed());
     }
 
