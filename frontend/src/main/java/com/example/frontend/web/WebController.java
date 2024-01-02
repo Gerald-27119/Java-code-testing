@@ -46,6 +46,10 @@ public class WebController {
         model.addAttribute("students", webService.getAllStudents());
         return "index";
     }
+    @GetMapping(path = "/create-student")
+    public String getEditStudent() {
+        return "/create-student";
+    }
 
     @GetMapping(path = "/edit-student")
     public String getEditStudentView(@RequestParam("id") Long id, Model model) {

@@ -1,4 +1,4 @@
 package com.example.frontend.ui;
 
-public class IndexTestPage {
+public class EditStudentTest {
 }
