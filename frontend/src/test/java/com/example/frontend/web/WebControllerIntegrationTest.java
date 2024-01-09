@@ -1,4 +1,10 @@
 package com.example.frontend.web;
 
-public class WebControllerIntegrationTest {
+import org.junit.jupiter.api.Test;
+
+class WebControllerIntegrationTest {
+    @Test
+    void addStudent() {
+
+    }
 }

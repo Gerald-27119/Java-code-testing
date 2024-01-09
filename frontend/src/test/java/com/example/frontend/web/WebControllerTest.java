@@ -1,4 +1,4 @@
 package com.example.frontend.web;
 
-public class WebControllerTest {
+class WebControllerTest {
 }

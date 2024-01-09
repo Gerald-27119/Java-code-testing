@@ -19,3 +19,11 @@ r
 Bfrontend/src/main/java/com/example/frontend/web/WebController.java,f\3\f3bfe21042229d7efe45890902c44b21107a98a5
 o
 ?frontend/src/main/java/com/example/frontend/web/WebService.java,f\2\f2f2588a85870ad0ef1134177224de43726b224c
+
+Qfrontend/src/test/java/com/example/frontend/web/WebControllerIntegrationTest.java,4\e\4ef97abe84d6d4e6842e20eae8e95328c54c3a19
+v
+Ffrontend/src/test/java/com/example/frontend/web/WebControllerTest.java,c\2\c26d3e893614f63d068b0904f48c9c812d3d1f21
+s
+Cfrontend/src/test/java/com/example/frontend/web/WebServiceTest.java,2\0\2040941ef42d8aff366cf63bf2baaabb0760aab8
+n
+>frontend/src/main/java/com/example/frontend/model/Student.java,d\8\d889aca9f78b284b08f286f7c81313bf41852ea4
