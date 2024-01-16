@@ -2,6 +2,7 @@ package com.example.frontend.web;
 
 
 import com.example.frontend.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,11 +10,12 @@ import java.util.List;
 
 @Service
 public class WebService {
+    @Autowired
     private final RestTemplate restTemplate;
     private final String studentControllerBaseUrl = "http://localhost:8080/api/student";
 
 
-    public WebService() {
+    public WebService(RestTemplate restTemplate){
         this.restTemplate = new RestTemplate();
     }
 
