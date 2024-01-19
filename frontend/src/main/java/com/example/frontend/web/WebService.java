@@ -3,6 +3,9 @@ package com.example.frontend.web;
 
 import com.example.frontend.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,7 +18,7 @@ public class WebService {
     private final String studentControllerBaseUrl = "http://localhost:8080/api/student";
 
 
-    public WebService(RestTemplate restTemplate){
+    public WebService(RestTemplate restTemplate) {
         this.restTemplate = new RestTemplate();
     }
 
@@ -31,8 +34,13 @@ public class WebService {
         restTemplate.delete(studentControllerBaseUrl + "/" + id);
     }
 
-    public List getAllStudents() {
-        return restTemplate.getForObject(studentControllerBaseUrl, List.class);
+    public List<Student> getAllStudents() {
+        return restTemplate.exchange(
+                studentControllerBaseUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Student>>() {
+                }).getBody();
     }
 
     public Student getStudentById(Long id) {

@@ -1,12 +1,12 @@
 package com.example.frontend.model;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 public class Student {
     protected Long id;
     protected String name;
