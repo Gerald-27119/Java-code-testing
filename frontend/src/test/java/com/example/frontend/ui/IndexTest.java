@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class IndexTest {
+class IndexTest {
     private WebDriver driver;
     private IndexTestPage indexTestPage;
 
@@ -49,6 +49,21 @@ public class IndexTest {
     public void testDeleteButton() {
         WebElement deleteButton = indexTestPage.getDeleteButton();
         assertTrue(deleteButton.isDisplayed());
+    }
+
+
+    @Test
+    @Order(5)
+    public void testTableHeaders() {
+        List<WebElement> tableHeaders = indexTestPage.getTableHeaders();
+        assertEquals(7, tableHeaders.size());
+        assertEquals("Id", tableHeaders.get(0).getText());
+        assertEquals("Name", tableHeaders.get(1).getText());
+        assertEquals("Surname", tableHeaders.get(2).getText());
+        assertEquals("Email", tableHeaders.get(3).getText());
+        assertEquals("Age", tableHeaders.get(4).getText());
+        assertEquals("Edit", tableHeaders.get(5).getText());
+        assertEquals("Delete", tableHeaders.get(6).getText());
     }
 
     @AfterEach

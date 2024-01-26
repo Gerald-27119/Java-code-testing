@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EditStudentTest {
+class EditStudentTest {
     private WebDriver driver;
     private EditStudentTestPage editStudentTestPage;
     private Student mockStudent;
@@ -73,6 +73,33 @@ public class EditStudentTest {
         String expectedUrl = "http://localhost:8081/index";
         String actualUrl = driver.getCurrentUrl();
         assertEquals(expectedUrl, actualUrl);
+    }
+    @Test
+    @Order(5)
+    public void testInputFields() {
+        WebElement nameInput = driver.findElement(By.id("name"));
+        WebElement surnameInput = driver.findElement(By.id("surname"));
+        WebElement emailInput = driver.findElement(By.id("email"));
+        WebElement ageInput = driver.findElement(By.id("age"));
+
+        assertTrue(nameInput.isDisplayed());
+        assertTrue(surnameInput.isDisplayed());
+        assertTrue(emailInput.isDisplayed());
+        assertTrue(ageInput.isDisplayed());
+    }
+
+    @Test
+    @Order(6)
+    public void testInputFieldsValues() {
+        WebElement nameInput = driver.findElement(By.id("name"));
+        WebElement surnameInput = driver.findElement(By.id("surname"));
+        WebElement emailInput = driver.findElement(By.id("email"));
+        WebElement ageInput = driver.findElement(By.id("age"));
+
+        assertEquals("John", nameInput.getAttribute("value"));
+        assertEquals("Doe", surnameInput.getAttribute("value"));
+        assertEquals("john.doe@example.com", emailInput.getAttribute("value"));
+        assertEquals("20", ageInput.getAttribute("value"));
     }
     @AfterEach
     public void tearDown() {

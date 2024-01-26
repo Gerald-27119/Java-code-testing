@@ -26,8 +26,6 @@ class StudentServiceTest {
     private ArgumentCaptor<Student> studentArgumentCaptor;
     @Mock
     private StudentRepository studentRepository;
-    @Mock
-    private StudentValidator studentValidator;
     private AutoCloseable openMocks;
     private Student student;
     private Student secondStudent;

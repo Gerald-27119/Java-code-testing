@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CreateStudentTest {
+class CreateStudentTest {
     private WebDriver driver;
     private CreateStudentTestPage createStudentTestPage;
 
@@ -65,11 +65,49 @@ public class CreateStudentTest {
 
         createStudentTestPage.getSubmitButton().click();
 
-        String expectedUrl = "http://localhost:8081/index";
+        String expectedUrl = "http://localhost:8081/create";
         String actualUrl = driver.getCurrentUrl();
         assertEquals(expectedUrl, actualUrl);
     }
+    @Test
+    @Order(5)
+    public void testFormSubmissionWithInvalidData() {
+        WebElement nameInput = driver.findElement(By.id("name"));
+        WebElement surnameInput = driver.findElement(By.id("surname"));
+        WebElement emailInput = driver.findElement(By.id("email"));
+        WebElement ageInput = driver.findElement(By.id("age"));
 
+        nameInput.sendKeys("");
+        surnameInput.sendKeys("");
+        emailInput.sendKeys("invalid email");
+        ageInput.sendKeys("-1");
+
+        createStudentTestPage.getSubmitButton().click();
+
+        WebElement nameError = driver.findElement(By.id("name-error"));
+        WebElement surnameError = driver.findElement(By.id("surname-error"));
+        WebElement emailError = driver.findElement(By.id("email-error"));
+        WebElement ageError = driver.findElement(By.id("age-error"));
+
+        assertEquals("Field must be filled", nameError.getText());
+        assertEquals("Field must be filled", surnameError.getText());
+        assertEquals("Invalid email", emailError.getText());
+        assertEquals("Invalid age", ageError.getText());
+    }
+
+    @Test
+    @Order(6)
+    public void testErrorMessagesNotDisplayedInitially() {
+        WebElement nameError = driver.findElement(By.id("name-error"));
+        WebElement surnameError = driver.findElement(By.id("surname-error"));
+        WebElement emailError = driver.findElement(By.id("email-error"));
+        WebElement ageError = driver.findElement(By.id("age-error"));
+
+        assertEquals("Field must be filled", nameError.getText());
+        assertEquals("Field must be filled", surnameError.getText());
+        assertEquals("Field must be filled", emailError.getText());
+        assertEquals("Field must be filled", ageError.getText());
+    }
     @AfterEach
     public void tearDown() {
         driver.quit();

@@ -41,6 +41,13 @@ public class IndexTestPage {
         wait.until(ExpectedConditions.visibilityOfAllElements(editButtons));
         return editButtons.get(index);
     }
+    public WebElement getNavigationLink() {
+        return driver.findElement(By.cssSelector("nav a"));
+    }
+
+    public List<WebElement> getTableHeaders() {
+        return driver.findElements(By.cssSelector("table.main th"));
+    }
 
     public WebElement getDeleteButton() {
         wait.until(ExpectedConditions.visibilityOf(deleteForm));

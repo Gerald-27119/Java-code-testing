@@ -19,7 +19,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,11 +34,6 @@ class StudentControllerIntegrationTest {
     private ArgumentCaptor<Student> studentArgumentCaptor;
     @Mock
     private StudentService studentService;
-    @Mock
-    private StudentExceptionHandler studentExceptionHandler;
-    @Mock
-    private StudentValidator studentValidator;
-    private AutoCloseable openMocks;
     @ExtendWith(MockitoExtension.class)
     private MockMvc mockMvc;
 
@@ -126,7 +123,37 @@ class StudentControllerIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT_PATH + "{id}", nonExistentId))
                 .andExpect(status().is2xxSuccessful());
     }
+    @Test
+    void createStudentShouldCallServiceWithCorrectStudent() throws Exception {
+        // Given
+        given(studentService.create(student)).willReturn(student);
 
+        // When
+        mockMvc.perform(MockMvcRequestBuilders.post(END_POINT_PATH)
+                        .contentType("application/json")
+                        .content(studentJson))
+                .andExpect(status().isOk());
 
+        // Then
+        verify(studentService).create(studentArgumentCaptor.capture());
+        Student capturedStudent = studentArgumentCaptor.getValue();
+        assertEquals(student, capturedStudent);
+    }
+
+    @Test
+    void deleteStudentShouldCallServiceWithCorrectId() throws Exception {
+        // Given
+        Long idToDelete = 1L;
+
+        // When
+        mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT_PATH + "{id}", idToDelete))
+                .andExpect(status().isNoContent());
+
+        // Then
+        ArgumentCaptor<Long> longArgumentCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(studentService).delete(longArgumentCaptor.capture());
+        Long capturedId = longArgumentCaptor.getValue();
+        assertEquals(idToDelete, capturedId);
+    }
 
 }

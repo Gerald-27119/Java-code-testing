@@ -7,33 +7,36 @@
     <title>Hi</title>
   </head>
   <body>
-    <a href="/create-student">Create Student</a>
-    <p id="main-text">Students:</p>
-    <table class="main">
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Age</th>
-      </tr>
-      <tr th:each="student : ${students}">
-        <td th:text="${student.id}">Id</td>
-        <td th:text="${student.name}">Name</td>
-        <td th:text="${student.surname}">Surname</td>
-        <td th:text="${student.email}">Email</td>
-        <td th:text="${student.age}">Age</td>
-        <td>
-          <button type="button" class="editButton">
-            <a th:href="@{/edit-student(id=${student.id})}">Edit</a>
-          </button>
-        <td>
-          <form action="/delete" method="post" id="deleteForm">
-            <input type="hidden" name="id" th:value="${student.id}">
-            <input type="submit" value="Delete">
-          </form>
-        </td>
-      </tr>
-    </table>
+    <div class="grid-or-flex-container">
+      <a href="/create-student">Create Student</a>
+      <table class="main">
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr th:each="student : ${students}">
+          <td th:text="${student.id}">Id</td>
+          <td th:text="${student.name}">Name</td>
+          <td th:text="${student.surname}">Surname</td>
+          <td th:text="${student.email}">Email</td>
+          <td th:text="${student.age}">Age</td>
+          <td>
+            <button type="button" class="editButton">
+              <a th:href="@{/edit-student(id=${student.id})}">Edit</a>
+            </button>
+          <td>
+            <form action="/delete" method="post" id="deleteForm">
+              <input type="hidden" name="id" th:value="${student.id}">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

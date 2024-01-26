@@ -20,7 +20,7 @@ class BackendApplicationTests {
     }
 
     @Test
-    void main() {
+    void mainTest() {
         BackendApplication.main(new String[]{});
         assertThat(ctx).isNotNull();
     }

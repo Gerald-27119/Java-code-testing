@@ -32,7 +32,7 @@ window.onload = function () {
     const addValidation = (field, errorElement, validationFn, errorMessage) => {
         field.addEventListener('input', function () {
             if (isEmpty(this.value) || !validationFn(this.value)) {
-                errorElement.textContent = isEmpty(this.value) ? 'Pole nie może być puste' : errorMessage;
+                errorElement.textContent = isEmpty(this.value) ? 'Field must be filled' : errorMessage;
                 formCheck[field.id] = false;
             } else {
                 errorElement.textContent = '';

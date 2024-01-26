@@ -46,7 +46,7 @@ class StudentValidatorTest {
         assertTrue(studentValidator.isFieldInvalid(null,null));
     }
     @Test
-    public void testValidateFIeldIsEmpty2() {
+    public void testValidateFIeldIsEmptySecondWay() {
         assertTrue(studentValidator.isFieldInvalid(new Object(),"null"));
     }
 }
